@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Collections.Generic;
 
-
+// Sample comment
 namespace CodeFirst
 {
     [TestFixture]
