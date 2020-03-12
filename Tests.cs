@@ -19,7 +19,7 @@ namespace CodeFirst
         [OneTimeSetUp]
         public void Setup()
         {
-            this.driver = SogetiUtils.InitDriver("Chrome", "C:\\Users\\jefisher\\Documents\\WebDriver");
+            this.driver = SogetiUtils.InitDriver("Chrome", "C:\\Users\\Briana\\SeleniumWebdrivers");
         }
 
         [TestCase("WhoWeAre")]
