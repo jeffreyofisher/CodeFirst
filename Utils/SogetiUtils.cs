@@ -37,6 +37,24 @@ namespace CodeFirst
             driver.Manage().Window.Maximize();
             _ = driver.Manage().Timeouts().ImplicitWait;
             return driver;
+        }
+
+        public static void WaitForUrl(IWebDriver driver, String url, int TimeoutInSecs=10) {
+           new WebDriverWait(
+               driver,
+               TimeSpan.FromSeconds(TimeoutInSecs)
+           ).Until(
+               ExpectedConditions.UrlToBe(url)
+           );
+        }  
+
+        public static void WaitForEltToBeVisible(IWebDriver driver, By BySelector, int TimeoutInSecs=10) {
+           new WebDriverWait(
+               driver,
+               TimeSpan.FromSeconds(TimeoutInSecs)
+           ).Until(
+               ExpectedConditions.ElementIsVisible(BySelector)
+           );
         }    
     }
 }
