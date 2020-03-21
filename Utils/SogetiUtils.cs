@@ -5,11 +5,38 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 
 using System;
+using System.Collections.Generic;
+
 
 namespace CodeFirst
 {
     public class SogetiUtils
     {
+        public class SelDescriptor
+        {
+            public By BySelector;
+            public Boolean IsAlwaysPresent;
+            public string Name;
+            public SelDescriptor(string aName, By BySelector, Boolean IsAlwaysPresent)
+            {
+                this.Name = aName;
+                this.BySelector = BySelector;
+                this.IsAlwaysPresent = IsAlwaysPresent;
+            }
+        } 
+        public class SelectorsMgr
+        {
+            Dictionary<string, SelDescriptor> SelectorsDict;
+
+            public SelectorsMgr()
+            {
+                this.SelectorsDict = new Dictionary<string, SelDescriptor>();
+            }
+            public void AddSelDescriptor(SelDescriptor aSelDesc)
+            {
+                this.SelectorsDict.Add(aSelDesc.Name, aSelDesc);
+            }
+        } 
         public static void LoadWebPage(IWebDriver driver, string Url, int TimeoutInSecs=10) 
         {
             driver.Url = Url;
