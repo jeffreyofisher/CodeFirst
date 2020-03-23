@@ -15,28 +15,44 @@ namespace CodeFirst
         public class SelDescriptor
         {
             public By BySelector;
-            public Boolean IsAlwaysPresent;
+            public Dictionary<string, string> AttrsDict;
             public string Name;
-            public SelDescriptor(string aName, By BySelector, Boolean IsAlwaysPresent)
+            public SelDescriptor(string aName, By aBySelector, Dictionary<string, string> aAttrsDict)
             {
-                this.Name = aName;
-                this.BySelector = BySelector;
-                this.IsAlwaysPresent = IsAlwaysPresent;
+                Name = aName;
+                BySelector = aBySelector;
+                AttrsDict = aAttrsDict;
             }
         } 
-        public class SelectorsMgr
-        {
-            Dictionary<string, SelDescriptor> SelectorsDict;
 
-            public SelectorsMgr()
+        public class SelsMgr
+        {
+            Dictionary<string, SelDescriptor> SelsDict;
+
+            public SelsMgr()
             {
-                this.SelectorsDict = new Dictionary<string, SelDescriptor>();
+                SelsDict = new Dictionary<string, SelDescriptor>();
             }
             public void AddSelDescriptor(SelDescriptor aSelDesc)
             {
-                this.SelectorsDict.Add(aSelDesc.Name, aSelDesc);
+                SelsDict.Add(aSelDesc.Name, aSelDesc);
             }
         } 
+
+        public class POM
+        {
+            public Dictionary<string, POM> POMTracker = new Dictionary<string, POM>();
+            public string Path;
+            public SelsMgr SelMgr;
+        
+            public POM(string aPath, SelsMgr aSelectorsMgr)
+            {
+                Path = aPath;
+                SelMgr = aSelectorsMgr;
+                POMTracker.Add(Path, this);
+            }
+        }
+
         public static void LoadWebPage(IWebDriver driver, string Url, int TimeoutInSecs=10) 
         {
             driver.Url = Url;
